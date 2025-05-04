@@ -1,3 +1,8 @@
+---
+description: This base rule for this project is to maintain the code quality, security and version-controlling
+globs: 
+alwaysApply: false
+---
 # IntentTube Project Rules
 
 ## General Project Information
@@ -67,4 +72,5 @@
   - refactor: for code refactoring
   - test: for adding or modifying tests
 - Include a descriptive message, e.g., "feat: implement user authentication"
+
 - Reference relevant issues or tickets if applicable.
