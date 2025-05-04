@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { AuthService } from './auth.service';
 
 interface IAuthContext {
   isAuthenticated: boolean;
@@ -11,13 +12,16 @@ const AuthContext = createContext<IAuthContext | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  useEffect(() => {
+    AuthService.checkAuth().then(setIsAuthenticated);
+  }, []);
+
   const login = () => {
-    // TODO: Implement Google OAuth login
-    setIsAuthenticated(true);
+    AuthService.loginWithGoogle();
   };
 
   const logout = () => {
-    // TODO: Implement logout logic
+    AuthService.logout();
     setIsAuthenticated(false);
   };
 

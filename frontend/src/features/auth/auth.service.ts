@@ -1,17 +1,32 @@
 export class AuthService {
-  static async loginWithGoogle() {
-    // TODO: Redirect to backend /auth/google endpoint
+  static loginWithGoogle() {
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL || ''}/auth/google`;
   }
 
   static async handleGoogleCallback(code: string) {
-    // TODO: Exchange code for tokens via backend
+    // Not needed: backend handles callback and sets cookies
   }
 
   static async refreshToken() {
-    // TODO: Call backend to refresh token
+    // Optionally call backend to refresh token
+    await fetch(`${import.meta.env.VITE_BACKEND_URL || ''}/auth/refresh`, {
+      method: 'POST',
+      credentials: 'include',
+    });
   }
 
   static async logout() {
-    // TODO: Call backend to logout and clear session
+    await fetch(`${import.meta.env.VITE_BACKEND_URL || ''}/auth/logout`, {
+      method: 'POST',
+      credentials: 'include',
+    });
+    window.location.href = '/login';
+  }
+
+  static async checkAuth() {
+    // Optionally call a backend endpoint to check auth status
+    // For now, assume presence of accessToken cookie means authenticated
+    // You can implement a /auth/status endpoint in backend for a robust check
+    return document.cookie.includes('accessToken');
   }
 } 

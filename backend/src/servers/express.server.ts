@@ -6,6 +6,8 @@ import session from 'express-session';
 import passport from '../configs/passport.config';
 import { SESSION_SECRET } from '../configs/env.config';
 import authenticationRouter from '../features/authentication/authentication.router';
+import v1Router from '../routers/v1.router';
+import healthRouter from '../routers/health.router';
 
 const app = express();
 
@@ -32,9 +34,8 @@ app.use(passport.session());
 
 // Routes
 app.use('/auth', authenticationRouter);
-
-// Health check
-app.get('/health', (req, res) => res.send('OK'));
+app.use('/api/v1', v1Router);
+app.use(healthRouter);
 
 const PORT = process.env.PORT || 5000;
 if (require.main === module) {

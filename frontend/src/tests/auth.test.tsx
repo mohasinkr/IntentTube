@@ -1,16 +1,22 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 // import { AuthProvider } from '../features/auth/AuthProvider';
-// import LoginPage from '../features/auth/LoginPage';
+import LoginPage from '../features/auth/LoginPage';
 // import ProtectedRoute from '../features/auth/ProtectedRoute';
+import * as AuthService from '../features/auth/auth.service';
 
 describe('Authentication UI', () => {
   it('should render Google Sign-In button', () => {
-    // TODO: Render LoginPage and assert button presence
+    render(<LoginPage />);
+    expect(screen.getByText('Sign in with Google')).toBeInTheDocument();
   });
 
   it('should trigger OAuth flow on button click', () => {
-    // TODO: Simulate button click and assert OAuth flow
+    const loginSpy = jest.spyOn(AuthService.AuthService, 'loginWithGoogle').mockImplementation(() => {});
+    render(<LoginPage />);
+    fireEvent.click(screen.getByText('Sign in with Google'));
+    expect(loginSpy).toHaveBeenCalled();
+    loginSpy.mockRestore();
   });
 
   it('should update UI on successful login', () => {
