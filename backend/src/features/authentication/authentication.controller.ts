@@ -20,7 +20,9 @@ export class AuthenticationController {
       // Store tokens in HTTP-only cookies
       res.cookie('accessToken', user.accessToken, { httpOnly: true, sameSite: 'lax' });
       res.cookie('refreshToken', user.refreshToken, { httpOnly: true, sameSite: 'lax' });
-      // Redirect or respond as needed
+      // Redirect or respond as 
+      console.log('User authenticated:', user);
+      
       return res.redirect('/'); // TODO: Redirect to frontend dashboard
     })(req, res, next);
   }
