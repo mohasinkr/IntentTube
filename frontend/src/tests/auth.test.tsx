@@ -12,7 +12,7 @@ describe('Authentication UI', () => {
   });
 
   it('should trigger OAuth flow on button click', () => {
-    const loginSpy = jest.spyOn(AuthService.AuthService, 'loginWithGoogle').mockImplementation(() => {});
+    const loginSpy = vi.spyOn(AuthService.AuthService, 'loginWithGoogle').mockImplementation(() => {});
     render(<LoginPage />);
     fireEvent.click(screen.getByText('Sign in with Google'));
     expect(loginSpy).toHaveBeenCalled();

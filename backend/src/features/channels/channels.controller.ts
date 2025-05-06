@@ -93,4 +93,16 @@ export class ChannelsController {
       res.status(500).json({ error: error.message || 'Failed to remove channel' });
     }
   }
+
+  static async getCuratedChannels(req: Request, res: Response) {
+    try {
+      const userId = (req.user as any)?.profile?.id || (req.user as any)?.googleId;
+      if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+      const user = await User.findOne({ googleId: userId });
+      if (!user) return res.status(404).json({ error: 'User not found' });
+      res.json({ selectedChannels: user.selectedChannels });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || 'Failed to fetch curated channels' });
+    }
+  }
 } 
