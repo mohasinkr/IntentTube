@@ -22,7 +22,7 @@ export function LoginForm({
               className="flex flex-col items-center gap-2 font-medium"
             >
               <p className="text-5xl text-center my-3">📺</p>
-              <span className="sr-only">Acme Inc.</span>
+              <span className="sr-only">Intent Tube</span>
             </a>
             <h1 className="font-bold text-3xl">Welcome to IntentTube</h1>
           </div>
